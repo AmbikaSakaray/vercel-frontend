@@ -1,0 +1,47 @@
+import { useEffect, useState } from "react";
+import { getMessages } from "../axios";
+
+function Messages() {
+
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    loadMessages();
+  }, []);
+
+  const loadMessages = async () => {
+
+    const data = await getMessages();
+
+    setMessages(data);
+
+  };
+
+  return (
+
+    <div>
+
+      <h2>Messages</h2>
+
+      {
+        messages.map((msg) => (
+
+          <div key={msg._id}>
+
+            <h4>{msg.name}</h4>
+
+            <p>{msg.email}</p>
+
+            <p>{msg.message}</p>
+
+          </div>
+
+        ))
+      }
+
+    </div>
+
+  );
+}
+
+export default Messages;
